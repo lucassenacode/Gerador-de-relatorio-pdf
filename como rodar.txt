@@ -1,0 +1,19 @@
+py gerar_relatorio.py menu_products
+
+
+py gerar_relatorio.py ingredients_summary
+
+
+py gerar_relatorio.py technical_sheets_mirror
+
+
+py gerar_relatorio.py product_preparation_mode
+
+
+py gerar_relatorio.py sub_products_summary
+
+
+py gerar_relatorio.py products_summary
+
+
+py gerar_relatorio.py

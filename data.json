@@ -1,0 +1,267 @@
+{
+  "project_name": "Bolo da Vovó",
+  "client_logo_url": "http://56.125.10.67/public/general/Bolos%20da%20Vovo.jpg",
+  "main_cover_image_url": "http://56.125.10.67/public/general/cover.jpg",
+  "company_logo_url": "http://56.125.10.67/public/general/logo-nutribem.png",
+  "report_data": {
+    "menu_products": {
+      "cover_image_url": "http://56.125.10.67/public/general/menu_products.jpg",
+      "items": [
+        {
+          "product_name": "Bolo de Cenoura com Cobertura de Chocolate – Individual",
+          "sale_price": 15.0
+        },
+        {
+          "product_name": "Bolo de Cenoura com Cobertura de Chocolate – Duplo",
+          "sale_price": 28.0
+        }
+      ]
+    },
+    "ingredients_summary": {
+      "cover_image_url": "http://56.125.10.67/public/general/ingredients_summary.jpg",
+      "items": [
+        {
+          "name": "Farinha de Trigo Tipo 1",
+          "category": "In natura",
+          "gross_price": 5.5,
+          "supplier": "Moagem Central Distribuidora"
+        },
+        {
+          "name": "Açúcar Refinado",
+          "category": "In natura",
+          "gross_price": 6.0,
+          "supplier": "Doce Cana Atacado"
+        },
+        {
+          "name": "Ovo de Galinha (Tipo Grande)",
+          "category": "In natura",
+          "gross_price": 14.0,
+          "supplier": "---"
+        },
+        {
+          "name": "Óleo de Soja",
+          "category": "In natura",
+          "gross_price": 8.5,
+          "supplier": "Cereais & Cia"
+        },
+        {
+          "name": "Cenoura",
+          "category": "In natura",
+          "gross_price": 4.5,
+          "supplier": "Hortifruti Raízes da Terra"
+        },
+        {
+          "name": "Fermento em Pó Químico",
+          "category": "In natura",
+          "gross_price": 25.0,
+          "supplier": "Ingredientes Mágicos Ltda"
+        },
+        {
+          "name": "Sal Refinado",
+          "category": "In natura",
+          "gross_price": 2.5,
+          "supplier": "Salinas do Nordeste"
+        },
+        {
+          "name": "Manteiga Sem Sal (Tablete)",
+          "category": "In natura",
+          "gross_price": 130.0,
+          "supplier": "Laticínios Vaca Feliz"
+        },
+        {
+          "name": "Leite Condensado (Lata)",
+          "category": "In natura",
+          "gross_price": 8.0,
+          "supplier": "Laticínios Vaca Feliz"
+        },
+        {
+          "name": "Chocolate em Pó 50%",
+          "category": "In natura",
+          "gross_price": 35.0,
+          "supplier": "Cacau & Cia"
+        },
+        {
+          "name": "Creme de Leite UHT (Caixa)",
+          "category": "In natura",
+          "gross_price": 7.5,
+          "supplier": "Laticínios Vaca Feliz"
+        },
+        {
+          "name": "Granulado de Chocolate Meio Amargo",
+          "category": "In natura",
+          "gross_price": 22.0,
+          "supplier": "Cacau & Cia"
+        },
+        {
+          "name": "Cobertura de Chocolate Cremosa",
+          "category": "Processado",
+          "gross_price": 22.0,
+          "supplier": "---"
+        }
+      ]
+    },
+    "technical_sheets_mirror": {
+      "cover_image_url": "http://56.125.10.67/public/general/technical_sheets_mirror.jpg",
+      "sheets": [
+        {
+          "sheet_name": "COBERTURA DE CHOCOLATE CREMOSA",
+          "ingredients": [
+            { "name": "Manteiga Sem Sal (Tablete)", "quantity": 0.1 },
+            { "name": "Leite Condensado (Lata)", "quantity": 1.0 },
+            { "name": "Chocolate em Pó 50%", "quantity": 0.2 },
+            { "name": "Creme de Leite UHT (Caixa)", "quantity": 0.5 }
+          ]
+        },
+        {
+          "sheet_name": "BOLO DE CENOURA COM COBERTURA DE CHOCOLATE - INDIVIDUAL",
+          "ingredients": [
+            { "name": "Granulado de Chocolate Meio Amargo", "quantity": 0.007 },
+            { "name": "Massa Crua de Bolo de Cenoura", "quantity": 0.14 },
+            { "name": "Cobertura de Chocolate Cremosa", "quantity": 0.06 }
+          ]
+        },
+        {
+          "sheet_name": "BOLO DE CENOURA COM COBERTURA DE CHOCOLATE - DUPLO",
+          "ingredients": [
+            { "name": "Granulado de Chocolate Meio Amargo", "quantity": 0.014 },
+            { "name": "Massa Crua de Bolo de Cenoura", "quantity": 0.281 },
+            { "name": "Cobertura de Chocolate Cremosa", "quantity": 0.119 }
+          ]
+        }
+      ]
+    },
+    "product_preparation_mode": {
+      "cover_image_url": "http://56.125.10.67/public/general/product_preparation_mode.jpg",
+      "items": [
+        {
+          "product_name": "BOLO DE CENOURA COM COBERTURA DE CHOCOLATE",
+          "product_preparation_mode": "1. Preparar a 'Massa Crua de Bolo de Cenoura' conforme a ficha técnica.\n2. Levar ao forno pré-aquecido a 180°C por aproximadamente 35 minutos.\n3. Enquanto o bolo assa, preparar a 'Cobertura de Chocolate Cremosa' conforme a ficha técnica.\n4. Após assado e frio, desenformar o bolo e cobrir com a cobertura.\n5. Finalizar decorando com o granulado de chocolate.",
+          "sub_products": [
+            {
+              "name": "Massa Crua de Bolo de Cenoura",
+              "preparation_mode": "1. Em um liquidificador, bata os ovos, o óleo e a cenoura até obter uma mistura homogênea.\n2. Em uma tigela, misture a farinha, o açúcar e o sal.\n3. Despeje a mistura líquida sobre os ingredientes secos e incorpore delicadamente.\n4. Por último, adicione o fermento em pó e misture suavemente."
+            },
+            {
+              "name": "Cobertura de Chocolate Cremosa",
+              "preparation_mode": "1. Em uma panela, misture o leite condensado, o chocolate em pó e a manteiga.\n2. Leve ao fogo baixo, mexendo sempre, até a mistura começar a desgrudar do fundo da panela (ponto de brigadeiro mole).\n3. Retire do fogo e incorpore o creme de leite para dar cremosidade."
+            }
+          ]
+        }
+      ]
+    },
+    "sub_products_summary": {
+      "cover_image_url": "http://56.125.10.67/public/general/sub_products_summary.jpg",
+      "sheets": [
+        {
+          "name": "COBERTURA DE CHOCOLATE CREMOSA",
+          "total_cost": 22.0,
+          "cost_per_kg": 12.94,
+          "yield_grams": 1.7,
+          "photo_url": "http://56.125.10.67/public/general/Cobertura%20de%20Chocolate%20Cremosa.jpg",
+          "ingredients": [
+            {
+              "name": "Leite Condensado (Lata)",
+              "gross_weight": 1.0,
+              "net_weight": 1.0,
+              "correction_factor": 1.0,
+              "unit_cost": 8.0
+            },
+            {
+              "name": "Creme de Leite UHT (Caixa)",
+              "gross_weight": 0.5,
+              "net_weight": 0.5,
+              "correction_factor": 1.0,
+              "unit_cost": 3.75
+            },
+            {
+              "name": "Chocolate em Pó 50%",
+              "gross_weight": 0.2,
+              "net_weight": 0.2,
+              "correction_factor": 1.0,
+              "unit_cost": 7.0
+            },
+            {
+              "name": "Manteiga Sem Sal (Tablete)",
+              "gross_weight": 0.1,
+              "net_weight": 0.1,
+              "correction_factor": 1.0,
+              "unit_cost": 3.25
+            }
+          ]
+        }
+      ]
+    },
+    "products_summary": {
+      "cover_image_url": "http://56.125.10.67/public/general/products_summary.jpg",
+      "sheets": [
+        {
+          "name": "BOLO DE CENOURA COM COBERTURA DE CHOCOLATE",
+          "average_ideal_cmv_percent": 13.81,
+          "photo_url": "http://56.125.10.67/public/general/Bolo%20de%20Cenoura%20com%20Cobertura%20de%20Chocolate.jpg",
+          "category": { "id": 1, "name": "Bolos" },
+          "portion_summaries": [
+            {
+              "portion_name": "Individual",
+              "cost_price": 2.0,
+              "sale_price": 15.0,
+              "ideal_cmv_percent": 13.33
+            },
+            {
+              "portion_name": "Duplo",
+              "cost_price": 4.0,
+              "sale_price": 28.0,
+              "ideal_cmv_percent": 14.29
+            }
+          ],
+          "ingredients": [
+            {
+              "name": "Massa Crua de Bolo de Cenoura",
+              "portions": [
+                {
+                  "portion_name": "Individual",
+                  "quantity": 0.14,
+                  "unit_cost": 1.19
+                },
+                {
+                  "portion_name": "Duplo",
+                  "quantity": 0.281,
+                  "unit_cost": 2.37
+                }
+              ]
+            },
+            {
+              "name": "Cobertura de Chocolate Cremosa",
+              "portions": [
+                {
+                  "portion_name": "Individual",
+                  "quantity": 0.06,
+                  "unit_cost": 0.77
+                },
+                {
+                  "portion_name": "Duplo",
+                  "quantity": 0.119,
+                  "unit_cost": 1.54
+                }
+              ]
+            },
+            {
+              "name": "Granulado de Chocolate Meio Amargo",
+              "portions": [
+                {
+                  "portion_name": "Individual",
+                  "quantity": 0.007,
+                  "unit_cost": 0.15
+                },
+                {
+                  "portion_name": "Duplo",
+                  "quantity": 0.014,
+                  "unit_cost": 0.31
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

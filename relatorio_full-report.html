@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Relatório de Projeto - Bolo da Vovó</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      @page {
+        size: A4;
+        margin: 5mm;
+      }
+
+      :root {
+        --greenDark: #304f2f;
+        --greenMedium: #4d6b37;
+        --greenLight: #73a04c;
+        --brandRed: #c00318;
+        --Orange: #ff9f40;
+        --neutralBlack: #1a1a1a;
+        --neutralGrey: #666;
+        --neutralBg: #f5f7f1;
+        --white: #ffffff;
+        --color-border: #dee2e6;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        line-height: 1.5;
+        color: var(--neutralGrey);
+        background-color: var(--white);
+        margin: 0;
+      }
+      .page {
+        background: var(--white);
+        height: 287mm;
+        box-sizing: border-box;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+      }
+      @media print {
+        body {
+          margin: 0;
+          background: none;
+        }
+        .page {
+          box-shadow: none;
+          margin: 0;
+          border-radius: 0;
+        }
+        .page-break {
+          page-break-after: always;
+        }
+      }
+
+      .page-break {
+        page-break-after: always;
+      }
+
+      /* === CAPA PRINCIPAL === */
+      .page.main-cover {
+        width: 100%;
+        height: 287mm;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        grid-template-rows: 240mm 47mm;
+        overflow: hidden;
+      }
+
+      .main-cover .hero {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            rgba(48, 79, 47, 0.65),
+            rgba(48, 79, 47, 0.65)
+          ),
+          var(--cover-image-url) center/cover no-repeat;
+      }
+
+      .main-cover .hero-title {
+        position: absolute;
+        left: 20mm;
+        bottom: 25mm;
+        max-width: 150mm;
+      }
+
+      .main-cover .hero-title h1 {
+        margin: 0;
+        color: var(--white);
+        font-weight: 800;
+        font-size: 16mm;
+        line-height: 1.05;
+        letter-spacing: 0.1mm;
+        border: none;
+      }
+
+      .main-cover .footer {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        margin-left: 40%;
+        background: #fff;
+      }
+
+      .main-cover .logo {
+        height: 28mm;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+      }
+
+      .main-cover .logo img {
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: contain;
+      }
+
+      /* === CAPAS DE SEÇÃO (NOVO DESIGN) === */
+      .page.section-cover {
+        display: grid;
+        grid-template-rows: 240mm 47mm; /* Área da imagem e rodapé */
+        background-color: var(--greenDark); /* Fundo verde escuro geral */
+        box-sizing: border-box;
+      }
+
+      .section-cover .hero-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Garante que a imagem cubra a área designada */
+      }
+
+      .section-cover .footer {
+        background-color: var(--white);
+        display: grid;
+        grid-template-columns: 70% 30%; /* Coluna para o título e coluna para a logo */
+        align-items: center;
+      }
+
+      .section-cover .title-block h1 {
+        font-size: 12mm;
+        font-weight: 800;
+        color: var(--greenDark);
+        margin: 0;
+        line-height: 1.1;
+        border: none; /* Remove a borda padrão dos H1 */
+      }
+
+      .section-cover .logo-block img {
+        height: 28mm;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+      }
+
+      /* --- ESTILOS GERAIS DE CONTEÚDO --- */
+      h1,
+      h2,
+      h3 {
+        color: var(--greenDark);
+        border-bottom: 2px solid var(--color-border);
+        padding-bottom: 10px;
+        margin-top: 1em;
+      }
+      h1 {
+        font-size: 2.2em;
+      }
+      h2 {
+        font-size: 1.8em;
+      }
+      h3 {
+        font-size: 1.4em;
+        border-bottom-width: 1px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      th,
+      td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid var(--color-border);
+      }
+      th {
+        background-color: #e8f5e9;
+        font-weight: 600;
+      }
+      ul {
+        padding-left: 20px;
+        list-style-position: outside;
+      }
+      .summary-sublist {
+        padding-left: 20px;
+        list-style-type: circle;
+      }
+      a {
+        text-decoration: none;
+        color: #007bff;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+
+      /* --- OUTLINES PARA DEBUG MAIN PAGE --- */
+      .page.main-cover {
+        outline: 2px solid black;
+      } /* Preta */
+      .main-cover .hero {
+        outline: 3px solid yellow;
+      } /* Amarela */
+      .main-cover .hero-title {
+        outline: 3px solid red;
+      } /* Vermelha */
+      .main-cover .footer {
+        outline: 3px solid hotpink;
+      } /* Rosa */
+      .main-cover .logo {
+        outline: 3px solid deepskyblue;
+      } /* Azul */
+
+      /* === OUTLINES PARA DEBUG (CAPAS DE SEÇÃO) === */
+      .page.section-cover {
+        outline: 2px solid black; /* Contorno da página inteira */
+      }
+      .section-cover .hero-image {
+        outline: 3px solid green; /* Contorno da imagem */
+      }
+      .section-cover .footer {
+        outline: 3px solid hotpink; /* Contorno do rodapé branco */
+      }
+      .section-cover .title-block {
+        outline: 3px solid blue; /* Contorno do bloco de título */
+      }
+      .section-cover .logo-block {
+        outline: 3px solid orange; /* Contorno do bloco da logo */
+      }
+    </style>
+  </head>
+  <body>
+            
+    <div
+      class="page main-cover"
+      style="--cover-image-url: url('http://56.125.10.67/public/general/cover.jpg')"
+    >
+      <div class="hero">
+        <div class="hero-title">
+          <h1>Bolo da Vovó</h1>
+        </div>
+      </div>
+      <div class="footer">
+        <div class="logo logo-cliente">
+          
+          <img src="http://56.125.10.67/public/general/Bolos%20da%20Vovo.jpg" alt="Logo do Cliente" />
+          
+        </div>
+        <div class="logo logo-nutribem">
+          
+          <img src="http://56.125.10.67/public/general/logo-nutribem.png" alt="Nutribem" />
+          
+        </div>
+      </div>
+    </div>
+    <div class="page-break"></div>
+     
+    <div class="page">
+      <h1>Sumário Geral</h1>
+      <ul>
+        
+        <li><a href="#menu_products">Cardápio de Produtos</a></li>
+         
+        <li><a href="#ingredients_summary">Resumo de Insumos</a></li>
+         
+        <li>
+          <a href="#technical_sheets_mirror">Espelho das Fichas Técnicas</a>
+        </li>
+         
+        <li>
+          <a href="#product_preparation_mode">Modo de Preparo dos Produtos</a>
+        </li>
+         
+        <li>
+          <a href="#sub_products_summary">Fichas Técnicas de Subprodutos</a>
+        </li>
+         
+        <li><a href="#products_summary">Fichas Técnicas de Produtos</a></li>
+        
+      </ul>
+    </div>
+    <div class="page-break"></div>
+
+      
+    <div id="menu_products" class="page section-cover">
+      <img
+        class="hero-image"
+        src="http://56.125.10.67/public/general/menu_products.jpg"
+        alt="Capa da Seção Cardápio de Produtos"
+      />
+      <div class="footer">
+        <div class="title-block">
+          <h1>Cardápio de Produtos</h1>
+        </div>
+        <div class="logo-block">
+          
+          <img src="http://56.125.10.67/public/general/logo-nutribem.png" alt="Nutribem" />
+          
+        </div>
+      </div>
+    </div>
+    <div class="page-break"></div>
+    
+    <div class="page">
+      <h2>Cardápio de Produtos</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Produto</th>
+            <th>Preço de Venda</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          <tr>
+            <td>Bolo de Cenoura com Cobertura de Chocolate – Individual</td>
+            <td>R$ 15.00</td>
+          </tr>
+          
+          <tr>
+            <td>Bolo de Cenoura com Cobertura de Chocolate – Duplo</td>
+            <td>R$ 28.00</td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
+    <div class="page-break"></div>
+       
+    <div id="ingredients_summary" class="page section-cover">
+      <img
+        class="hero-image"
+        src="http://56.125.10.67/public/general/ingredients_summary.jpg"
+        alt="Capa da Seção Resumo de
+    Insumos"
+      />
+      <div class="footer">
+        <div class="title-block">
+          <h1>Resumo de
+    Insumos</h1>
+        </div>
+        <div class="logo-block">
+          
+          <img src="http://56.125.10.67/public/general/logo-nutribem.png" alt="Nutribem" />
+          
+        </div>
+      </div>
+    </div>
+    <div class="page-break"></div>
+    
+    <div class="page">
+      <h2>Resumo de Insumos</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Insumo</th>
+            <th>Categoria</th>
+            <th>Preço de Custo</th>
+            <th>Fornecedor</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          <tr>
+            <td>Farinha de Trigo Tipo 1</td>
+            <td>In natura</td>
+            <td>R$ 5.50</td>
+            <td>Moagem Central Distribuidora</td>
+          </tr>
+          
+          <tr>
+            <td>Açúcar Refinado</td>
+            <td>In natura</td>
+            <td>R$ 6.00</td>
+            <td>Doce Cana Atacado</td>
+          </tr>
+          
+          <tr>
+            <td>Ovo de Galinha (Tipo Grande)</td>
+            <td>In natura</td>
+            <td>R$ 14.00</td>
+            <td>---</td>
+          </tr>
+          
+          <tr>
+            <td>Óleo de Soja</td>
+            <td>In natura</td>
+            <td>R$ 8.50</td>
+            <td>Cereais & Cia</td>
+          </tr>
+          
+          <tr>
+            <td>Cenoura</td>
+            <td>In natura</td>
+            <td>R$ 4.50</td>
+            <td>Hortifruti Raízes da Terra</td>
+          </tr>
+          
+          <tr>
+            <td>Fermento em Pó Químico</td>
+            <td>In natura</td>
+            <td>R$ 25.00</td>
+            <td>Ingredientes Mágicos Ltda</td>
+          </tr>
+          
+          <tr>
+            <td>Sal Refinado</td>
+            <td>In natura</td>
+            <td>R$ 2.50</td>
+            <td>Salinas do Nordeste</td>
+          </tr>
+          
+          <tr>
+            <td>Manteiga Sem Sal (Tablete)</td>
+            <td>In natura</td>
+            <td>R$ 130.00</td>
+            <td>Laticínios Vaca Feliz</td>
+          </tr>
+          
+          <tr>
+            <td>Leite Condensado (Lata)</td>
+            <td>In natura</td>
+            <td>R$ 8.00</td>
+            <td>Laticínios Vaca Feliz</td>
+          </tr>
+          
+          <tr>
+            <td>Chocolate em Pó 50%</td>
+            <td>In natura</td>
+            <td>R$ 35.00</td>
+            <td>Cacau & Cia</td>
+          </tr>
+          
+          <tr>
+            <td>Creme de Leite UHT (Caixa)</td>
+            <td>In natura</td>
+            <td>R$ 7.50</td>
+            <td>Laticínios Vaca Feliz</td>
+          </tr>
+          
+          <tr>
+            <td>Granulado de Chocolate Meio Amargo</td>
+            <td>In natura</td>
+            <td>R$ 22.00</td>
+            <td>Cacau & Cia</td>
+          </tr>
+          
+          <tr>
+            <td>Cobertura de Chocolate Cremosa</td>
+            <td>Processado</td>
+            <td>R$ 22.00</td>
+            <td>---</td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
+    <div class="page-break"></div>
+       
+    <div id="technical_sheets_mirror" class="page section-cover">
+      <img
+        class="hero-image"
+        src="http://56.125.10.67/public/general/technical_sheets_mirror.jpg"
+        alt="Capa da Seção Espelho
+    das Fichas Técnicas"
+      />
+      <div class="footer">
+        <div class="title-block">
+          <h1>Espelho
+    das Fichas Técnicas</h1>
+        </div>
+        <div class="logo-block">
+          
+          <img src="http://56.125.10.67/public/general/logo-nutribem.png" alt="Nutribem" />
+          
+        </div>
+      </div>
+    </div>
+    <div class="page-break"></div>
+    
+    <div class="page">
+      <h2>Espelho das Fichas Técnicas</h2>
+      <ul>
+        
+        <li>
+          <a href="#sheet-mirror-1">COBERTURA DE CHOCOLATE CREMOSA</a>
+        </li>
+        
+        <li>
+          <a href="#sheet-mirror-2">BOLO DE CENOURA COM COBERTURA DE CHOCOLATE - INDIVIDUAL</a>
+        </li>
+        
+        <li>
+          <a href="#sheet-mirror-3">BOLO DE CENOURA COM COBERTURA DE CHOCOLATE - DUPLO</a>
+        </li>
+        
+      </ul>
+    </div>
+    <div class="page-break"></div>
+    <div class="page">
+      <h2>Espelho das Fichas Técnicas</h2>
+      
+      <h3 id="sheet-mirror-1">COBERTURA DE CHOCOLATE CREMOSA</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Ingrediente</th>
+            <th>Quantidade (kg)</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          <tr>
+            <td>Manteiga Sem Sal (Tablete)</td>
+            <td>0.100</td>
+          </tr>
+          
+          <tr>
+            <td>Leite Condensado (Lata)</td>
+            <td>1.000</td>
+          </tr>
+          
+          <tr>
+            <td>Chocolate em Pó 50%</td>
+            <td>0.200</td>
+          </tr>
+          
+          <tr>
+            <td>Creme de Leite UHT (Caixa)</td>
+            <td>0.500</td>
+          </tr>
+          
+        </tbody>
+      </table>
+      
+      <h3 id="sheet-mirror-2">BOLO DE CENOURA COM COBERTURA DE CHOCOLATE - INDIVIDUAL</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Ingrediente</th>
+            <th>Quantidade (kg)</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          <tr>
+            <td>Granulado de Chocolate Meio Amargo</td>
+            <td>0.007</td>
+          </tr>
+          
+          <tr>
+            <td>Massa Crua de Bolo de Cenoura</td>
+            <td>0.140</td>
+          </tr>
+          
+          <tr>
+            <td>Cobertura de Chocolate Cremosa</td>
+            <td>0.060</td>
+          </tr>
+          
+        </tbody>
+      </table>
+      
+      <h3 id="sheet-mirror-3">BOLO DE CENOURA COM COBERTURA DE CHOCOLATE - DUPLO</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Ingrediente</th>
+            <th>Quantidade (kg)</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          <tr>
+            <td>Granulado de Chocolate Meio Amargo</td>
+            <td>0.014</td>
+          </tr>
+          
+          <tr>
+            <td>Massa Crua de Bolo de Cenoura</td>
+            <td>0.281</td>
+          </tr>
+          
+          <tr>
+            <td>Cobertura de Chocolate Cremosa</td>
+            <td>0.119</td>
+          </tr>
+          
+        </tbody>
+      </table>
+      
+    </div>
+    <div class="page-break"></div>
+       
+    <div id="product_preparation_mode" class="page section-cover">
+      <img
+        class="hero-image"
+        src="http://56.125.10.67/public/general/product_preparation_mode.jpg"
+        alt="Capa da Seção Modo
+    de Preparo"
+      />
+      <div class="footer">
+        <div class="title-block">
+          <h1>Modo
+    de Preparo</h1>
+        </div>
+        <div class="logo-block">
+          
+          <img src="http://56.125.10.67/public/general/logo-nutribem.png" alt="Nutribem" />
+          
+        </div>
+      </div>
+    </div>
+    <div class="page-break"></div>
+    
+    <div class="page">
+      <h2>Modo de Preparo dos Produtos</h2>
+      <ul>
+        
+        <li>
+          <a href="#prep-mode-1">BOLO DE CENOURA COM COBERTURA DE CHOCOLATE</a>
+        </li>
+        
+      </ul>
+    </div>
+    <div class="page-break"></div>
+    <div class="page">
+      <h2>Modo de Preparo dos Produtos</h2>
+      
+      <h3 id="prep-mode-1">BOLO DE CENOURA COM COBERTURA DE CHOCOLATE</h3>
+      
+      <h4>Modo de Preparo do Produto</h4>
+      <div class="preparation-mode">1. Preparar a 'Massa Crua de Bolo de Cenoura' conforme a ficha técnica.
+2. Levar ao forno pré-aquecido a 180°C por aproximadamente 35 minutos.
+3. Enquanto o bolo assa, preparar a 'Cobertura de Chocolate Cremosa' conforme a ficha técnica.
+4. Após assado e frio, desenformar o bolo e cobrir com a cobertura.
+5. Finalizar decorando com o granulado de chocolate.</div>
+       
+      <h4>Modo de Preparo dos Componentes</h4>
+      
+      <h5>Massa Crua de Bolo de Cenoura</h5>
+      <div class="preparation-mode">
+        1. Em um liquidificador, bata os ovos, o óleo e a cenoura até obter uma mistura homogênea.
+2. Em uma tigela, misture a farinha, o açúcar e o sal.
+3. Despeje a mistura líquida sobre os ingredientes secos e incorpore delicadamente.
+4. Por último, adicione o fermento em pó e misture suavemente.
+      </div>
+      
+      <h5>Cobertura de Chocolate Cremosa</h5>
+      <div class="preparation-mode">
+        1. Em uma panela, misture o leite condensado, o chocolate em pó e a manteiga.
+2. Leve ao fogo baixo, mexendo sempre, até a mistura começar a desgrudar do fundo da panela (ponto de brigadeiro mole).
+3. Retire do fogo e incorpore o creme de leite para dar cremosidade.
+      </div>
+        
+    </div>
+    <div class="page-break"></div>
+       
+    <div id="sub_products_summary" class="page section-cover">
+      <img
+        class="hero-image"
+        src="http://56.125.10.67/public/general/sub_products_summary.jpg"
+        alt="Capa da Seção Fichas de
+    Subprodutos"
+      />
+      <div class="footer">
+        <div class="title-block">
+          <h1>Fichas de
+    Subprodutos</h1>
+        </div>
+        <div class="logo-block">
+          
+          <img src="http://56.125.10.67/public/general/logo-nutribem.png" alt="Nutribem" />
+          
+        </div>
+      </div>
+    </div>
+    <div class="page-break"></div>
+    
+    <div class="page">
+      <h2>Sumário de Fichas de Subproduto</h2>
+      <ul>
+        
+        <li>
+          <a href="#sub-product-sheet-1">COBERTURA DE CHOCOLATE CREMOSA</a>
+        </li>
+        
+      </ul>
+    </div>
+    <div class="page-break"></div>
+
+    
+    <div class="page">
+      <h3 id="sub-product-sheet-1">COBERTURA DE CHOCOLATE CREMOSA</h3>
+      
+      <div style="text-align: center; margin-bottom: 20px">
+        <img
+          src="http://56.125.10.67/public/general/Cobertura%20de%20Chocolate%20Cremosa.jpg"
+          alt="Foto de COBERTURA DE CHOCOLATE CREMOSA"
+          style="max-width: 80%; height: auto; border-radius: 8px"
+        />
+      </div>
+      
+      <p>
+        <strong>Custo Total:</strong> R$ 22.00 |
+        <strong>Custo por Kg:</strong> R$ 12.94 |
+        <strong>Rendimento:</strong> 1.700 kg
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Ingrediente</th>
+            <th>Peso Bruto (kg)</th>
+            <th>Peso Líquido (kg)</th>
+            <th>Fator Correção</th>
+            <th>Custo na Receita</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          <tr>
+            <td>Leite Condensado (Lata)</td>
+            <td>1.000</td>
+            <td>1.000</td>
+            <td>1.00</td>
+            <td>R$ 8.00</td>
+          </tr>
+          
+          <tr>
+            <td>Creme de Leite UHT (Caixa)</td>
+            <td>0.500</td>
+            <td>0.500</td>
+            <td>1.00</td>
+            <td>R$ 3.75</td>
+          </tr>
+          
+          <tr>
+            <td>Chocolate em Pó 50%</td>
+            <td>0.200</td>
+            <td>0.200</td>
+            <td>1.00</td>
+            <td>R$ 7.00</td>
+          </tr>
+          
+          <tr>
+            <td>Manteiga Sem Sal (Tablete)</td>
+            <td>0.100</td>
+            <td>0.100</td>
+            <td>1.00</td>
+            <td>R$ 3.25</td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
+    <div class="page-break"></div>
+        
+    <div id="products_summary" class="page section-cover">
+      <img
+        class="hero-image"
+        src="http://56.125.10.67/public/general/products_summary.jpg"
+        alt="Capa da Seção Fichas de
+    Produtos"
+      />
+      <div class="footer">
+        <div class="title-block">
+          <h1>Fichas de
+    Produtos</h1>
+        </div>
+        <div class="logo-block">
+          
+          <img src="http://56.125.10.67/public/general/logo-nutribem.png" alt="Nutribem" />
+          
+        </div>
+      </div>
+    </div>
+    <div class="page-break"></div>
+    
+    <div class="page">
+      <h2>Sumário de Fichas de Produto</h2>
+      <ul>
+        
+        <li>
+          <a href="#category-Bolos"
+            >Bolos</a
+          >
+          <ul class="summary-sublist">
+            
+            <li>
+              <a href="#product-sheet-BOLO-DE-CENOURA-COM-COBERTURA-DE-CHOCOLATE"
+                >BOLO DE CENOURA COM COBERTURA DE CHOCOLATE</a
+              >
+            </li>
+            
+          </ul>
+        </li>
+        
+      </ul>
+    </div>
+    <div class="page-break"></div>
+
+       
+    <div id="category-Bolos" class="page section-cover">
+      <img
+        class="hero-image"
+        src="http://56.125.10.67/public/general/products_summary.jpg"
+        alt="Capa da Seção Bolos"
+      />
+      <div class="footer">
+        <div class="title-block">
+          <h1>Bolos</h1>
+        </div>
+        <div class="logo-block">
+          
+          <img src="http://56.125.10.67/public/general/logo-nutribem.png" alt="Nutribem" />
+          
+        </div>
+      </div>
+    </div>
+    <div class="page-break"></div>
+     
+    <div class="page">
+      <h3 id="product-sheet-BOLO-DE-CENOURA-COM-COBERTURA-DE-CHOCOLATE">
+        BOLO DE CENOURA COM COBERTURA DE CHOCOLATE
+      </h3>
+      
+      <div style="text-align: center; margin-bottom: 20px">
+        <img
+          src="http://56.125.10.67/public/general/Bolo%20de%20Cenoura%20com%20Cobertura%20de%20Chocolate.jpg"
+          alt="Foto de BOLO DE CENOURA COM COBERTURA DE CHOCOLATE"
+          style="max-width: 80%; height: auto; border-radius: 8px"
+        />
+      </div>
+      
+      <p>
+        <strong>CMV Médio Ideal:</strong> 13.81%
+      </p>
+
+      <h4>Resumo por Porção</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Porção</th>
+            <th>Custo</th>
+            <th>Preço Venda</th>
+            <th>CMV Ideal</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          <tr>
+            <td>Individual</td>
+            <td>R$ 2.00</td>
+            <td>R$ 15.00</td>
+            <td>13.33%</td>
+          </tr>
+          
+          <tr>
+            <td>Duplo</td>
+            <td>R$ 4.00</td>
+            <td>R$ 28.00</td>
+            <td>14.29%</td>
+          </tr>
+          
+        </tbody>
+      </table>
+
+      <h4>Detalhamento de Ingredientes por Porção</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Ingrediente</th>
+            <th>Porção</th>
+            <th>Quantidade (kg)</th>
+            <th>Custo na Receita</th>
+          </tr>
+        </thead>
+        <tbody>
+           
+          <tr>
+            <td rowspan="2">
+              Massa Crua de Bolo de Cenoura
+            </td>
+            <td>Individual</td>
+            <td>0.140</td>
+            <td>
+              R$ 1.19
+            </td>
+          </tr>
+          
+          <tr>
+            <td>Duplo</td>
+            <td>0.281</td>
+            <td>R$ 2.37</td>
+          </tr>
+             
+          <tr>
+            <td rowspan="2">
+              Cobertura de Chocolate Cremosa
+            </td>
+            <td>Individual</td>
+            <td>0.060</td>
+            <td>
+              R$ 0.77
+            </td>
+          </tr>
+          
+          <tr>
+            <td>Duplo</td>
+            <td>0.119</td>
+            <td>R$ 1.54</td>
+          </tr>
+             
+          <tr>
+            <td rowspan="2">
+              Granulado de Chocolate Meio Amargo
+            </td>
+            <td>Individual</td>
+            <td>0.007</td>
+            <td>
+              R$ 0.15
+            </td>
+          </tr>
+          
+          <tr>
+            <td>Duplo</td>
+            <td>0.014</td>
+            <td>R$ 0.31</td>
+          </tr>
+            
+        </tbody>
+      </table>
+    </div>
+    <div class="page-break"></div>
+      
+  </body>
+</html>

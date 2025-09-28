@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Relatório de Projeto - {{ project_name }}</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      @page {
+        size: A4;
+        margin: 5mm;
+      }
+
+      :root {
+        --greenDark: #304f2f;
+        --greenMedium: #4d6b37;
+        --greenLight: #73a04c;
+        --brandRed: #c00318;
+        --Orange: #ff9f40;
+        --neutralBlack: #1a1a1a;
+        --neutralGrey: #666;
+        --neutralBg: #f5f7f1;
+        --white: #ffffff;
+        --color-border: #dee2e6;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        line-height: 1.5;
+        color: var(--neutralGrey);
+        background-color: var(--white);
+        margin: 0;
+      }
+      .page {
+        background: var(--white);
+        height: 287mm;
+        box-sizing: border-box;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+      }
+      @media print {
+        body {
+          margin: 0;
+          background: none;
+        }
+        .page {
+          box-shadow: none;
+          margin: 0;
+          border-radius: 0;
+        }
+        .page-break {
+          page-break-after: always;
+        }
+      }
+
+      .page-break {
+        page-break-after: always;
+      }
+
+      /* === CAPA PRINCIPAL === */
+      .page.main-cover {
+        width: 100%;
+        height: 287mm;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        grid-template-rows: 240mm 47mm;
+        overflow: hidden;
+      }
+
+      .main-cover .hero {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            rgba(48, 79, 47, 0.65),
+            rgba(48, 79, 47, 0.65)
+          ),
+          var(--cover-image-url) center/cover no-repeat;
+      }
+
+      .main-cover .hero-title {
+        position: absolute;
+        left: 20mm;
+        bottom: 25mm;
+        max-width: 150mm;
+      }
+
+      .main-cover .hero-title h1 {
+        margin: 0;
+        color: var(--white);
+        font-weight: 800;
+        font-size: 16mm;
+        line-height: 1.05;
+        letter-spacing: 0.1mm;
+        border: none;
+      }
+
+      .main-cover .footer {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        margin-left: 40%;
+        background: #fff;
+      }
+
+      .main-cover .logo {
+        height: 28mm;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+      }
+
+      .main-cover .logo img {
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: contain;
+      }
+
+      /* === CAPAS DE SEÇÃO (NOVO DESIGN) === */
+      .page.section-cover {
+        display: grid;
+        grid-template-rows: 240mm 47mm; /* Área da imagem e rodapé */
+        background-color: var(--greenDark); /* Fundo verde escuro geral */
+        box-sizing: border-box;
+      }
+
+      .section-cover .hero-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Garante que a imagem cubra a área designada */
+      }
+
+      .section-cover .footer {
+        background-color: var(--white);
+        display: grid;
+        grid-template-columns: 70% 30%; /* Coluna para o título e coluna para a logo */
+        align-items: center;
+      }
+
+      .section-cover .title-block h1 {
+        font-size: 12mm;
+        font-weight: 800;
+        color: var(--greenDark);
+        margin: 0;
+        line-height: 1.1;
+        border: none; /* Remove a borda padrão dos H1 */
+      }
+
+      .section-cover .logo-block img {
+        height: 28mm;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+      }
+
+      /* --- ESTILOS GERAIS DE CONTEÚDO --- */
+      h1,
+      h2,
+      h3 {
+        color: var(--greenDark);
+        border-bottom: 2px solid var(--color-border);
+        padding-bottom: 10px;
+        margin-top: 1em;
+      }
+      h1 {
+        font-size: 2.2em;
+      }
+      h2 {
+        font-size: 1.8em;
+      }
+      h3 {
+        font-size: 1.4em;
+        border-bottom-width: 1px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      th,
+      td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid var(--color-border);
+      }
+      th {
+        background-color: #e8f5e9;
+        font-weight: 600;
+      }
+      ul {
+        padding-left: 20px;
+        list-style-position: outside;
+      }
+      .summary-sublist {
+        padding-left: 20px;
+        list-style-type: circle;
+      }
+      a {
+        text-decoration: none;
+        color: #007bff;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+
+      /* --- OUTLINES PARA DEBUG MAIN PAGE --- */
+      .page.main-cover {
+        outline: 2px solid black;
+      } /* Preta */
+      .main-cover .hero {
+        outline: 3px solid yellow;
+      } /* Amarela */
+      .main-cover .hero-title {
+        outline: 3px solid red;
+      } /* Vermelha */
+      .main-cover .footer {
+        outline: 3px solid hotpink;
+      } /* Rosa */
+      .main-cover .logo {
+        outline: 3px solid deepskyblue;
+      } /* Azul */
+
+      /* === OUTLINES PARA DEBUG (CAPAS DE SEÇÃO) === */
+      .page.section-cover {
+        outline: 2px solid black; /* Contorno da página inteira */
+      }
+      .section-cover .hero-image {
+        outline: 3px solid green; /* Contorno da imagem */
+      }
+      .section-cover .footer {
+        outline: 3px solid hotpink; /* Contorno do rodapé branco */
+      }
+      .section-cover .title-block {
+        outline: 3px solid blue; /* Contorno do bloco de título */
+      }
+      .section-cover .logo-block {
+        outline: 3px solid orange; /* Contorno do bloco da logo */
+      }
+    </style>
+  </head>
+  <body>
+    {# --- MACRO PARA A CAPA PRINCIPAL --- #} {% macro main_cover_page(title,
+    cover_image_url, client_logo_url, company_logo_url) %}
+    <div
+      class="page main-cover"
+      style="--cover-image-url: url('{{ cover_image_url }}')"
+    >
+      <div class="hero">
+        <div class="hero-title">
+          <h1>{{ title }}</h1>
+        </div>
+      </div>
+      <div class="footer">
+        <div class="logo logo-cliente">
+          {% if client_logo_url %}
+          <img src="{{ client_logo_url }}" alt="Logo do Cliente" />
+          {% endif %}
+        </div>
+        <div class="logo logo-nutribem">
+          {% if company_logo_url %}
+          <img src="{{ company_logo_url }}" alt="Nutribem" />
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="page-break"></div>
+    {% endmacro %} {# --- NOVA MACRO PARA CAPAS DE SEÇÃO --- #} {% macro
+    section_cover_page(title, image_url, company_logo_url, id='') %}
+    <div id="{{id}}" class="page section-cover">
+      <img
+        class="hero-image"
+        src="{{ image_url }}"
+        alt="Capa da Seção {{ title }}"
+      />
+      <div class="footer">
+        <div class="title-block">
+          <h1>{{ title }}</h1>
+        </div>
+        <div class="logo-block">
+          {% if company_logo_url %}
+          <img src="{{ company_logo_url }}" alt="Nutribem" />
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="page-break"></div>
+    {% endmacro %} {# --- LÓGICA PRINCIPAL DO TEMPLATE --- #} {# Define a imagem
+    da capa principal #} {% set cover_image = main_cover_image_url %} {#
+    Renderiza a capa principal #} {{ main_cover_page( title=project_name,
+    cover_image_url=cover_image, client_logo_url=client_logo_url,
+    company_logo_url=company_logo_url ) }} {# Sumário Geral #}
+    <div class="page">
+      <h1>Sumário Geral</h1>
+      <ul>
+        {% if report_data.menu_products %}
+        <li><a href="#menu_products">Cardápio de Produtos</a></li>
+        {% endif %} {% if report_data.ingredients_summary %}
+        <li><a href="#ingredients_summary">Resumo de Insumos</a></li>
+        {% endif %} {% if report_data.technical_sheets_mirror %}
+        <li>
+          <a href="#technical_sheets_mirror">Espelho das Fichas Técnicas</a>
+        </li>
+        {% endif %} {% if report_data.product_preparation_mode %}
+        <li>
+          <a href="#product_preparation_mode">Modo de Preparo dos Produtos</a>
+        </li>
+        {% endif %} {% if report_data.sub_products_summary %}
+        <li>
+          <a href="#sub_products_summary">Fichas Técnicas de Subprodutos</a>
+        </li>
+        {% endif %} {% if report_data.products_summary %}
+        <li><a href="#products_summary">Fichas Técnicas de Produtos</a></li>
+        {% endif %}
+      </ul>
+    </div>
+    <div class="page-break"></div>
+
+    {# Seção: Cardápio de Produtos #} {% if report_data.menu_products %} {{
+    section_cover_page( title='Cardápio de Produtos', id='menu_products',
+    image_url=report_data.menu_products.cover_image_url,
+    company_logo_url=company_logo_url ) }}
+    <div class="page">
+      <h2>Cardápio de Produtos</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Produto</th>
+            <th>Preço de Venda</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in report_data.menu_products['items'] %}
+          <tr>
+            <td>{{ item.product_name }}</td>
+            <td>R$ {{ "%.2f"|format(item.sale_price|float) }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="page-break"></div>
+    {% endif %} {# Seção: Resumo de Insumos #} {% if
+    report_data.ingredients_summary %} {{ section_cover_page( title='Resumo de
+    Insumos', id='ingredients_summary',
+    image_url=report_data.ingredients_summary.cover_image_url,
+    company_logo_url=company_logo_url ) }}
+    <div class="page">
+      <h2>Resumo de Insumos</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Insumo</th>
+            <th>Categoria</th>
+            <th>Preço de Custo</th>
+            <th>Fornecedor</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in report_data.ingredients_summary['items'] %}
+          <tr>
+            <td>{{ item.name }}</td>
+            <td>{{ item.category }}</td>
+            <td>R$ {{ "%.2f"|format(item.gross_price|float) }}</td>
+            <td>{{ item.supplier or '---' }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="page-break"></div>
+    {% endif %} {# Seção: Espelho das Fichas Técnicas #} {% if
+    report_data.technical_sheets_mirror %} {{ section_cover_page( title='Espelho
+    das Fichas Técnicas', id='technical_sheets_mirror',
+    image_url=report_data.technical_sheets_mirror.cover_image_url,
+    company_logo_url=company_logo_url ) }}
+    <div class="page">
+      <h2>Espelho das Fichas Técnicas</h2>
+      <ul>
+        {% for sheet in report_data.technical_sheets_mirror['sheets'] %}
+        <li>
+          <a href="#sheet-mirror-{{ loop.index }}">{{ sheet.sheet_name }}</a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="page-break"></div>
+    <div class="page">
+      <h2>Espelho das Fichas Técnicas</h2>
+      {% for sheet in report_data.technical_sheets_mirror['sheets'] %}
+      <h3 id="sheet-mirror-{{ loop.index }}">{{ sheet.sheet_name }}</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Ingrediente</th>
+            <th>Quantidade (kg)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for ingredient in sheet['ingredients'] %}
+          <tr>
+            <td>{{ ingredient.name }}</td>
+            <td>{{ "%.3f"|format(ingredient.quantity|float) }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endfor %}
+    </div>
+    <div class="page-break"></div>
+    {% endif %} {# Seção: Modo de Preparo #} {% if
+    report_data.product_preparation_mode %} {{ section_cover_page( title='Modo
+    de Preparo', id='product_preparation_mode',
+    image_url=report_data.product_preparation_mode.cover_image_url,
+    company_logo_url=company_logo_url ) }}
+    <div class="page">
+      <h2>Modo de Preparo dos Produtos</h2>
+      <ul>
+        {% for item in report_data.product_preparation_mode['items'] %}
+        <li>
+          <a href="#prep-mode-{{ loop.index }}">{{ item.product_name }}</a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="page-break"></div>
+    <div class="page">
+      <h2>Modo de Preparo dos Produtos</h2>
+      {% for item in report_data.product_preparation_mode['items'] %}
+      <h3 id="prep-mode-{{ loop.index }}">{{ item.product_name }}</h3>
+      {% if item.product_preparation_mode %}
+      <h4>Modo de Preparo do Produto</h4>
+      <div class="preparation-mode">{{ item.product_preparation_mode }}</div>
+      {% endif %} {% if item.sub_products %}
+      <h4>Modo de Preparo dos Componentes</h4>
+      {% for sp in item['sub_products'] %}
+      <h5>{{ sp.name }}</h5>
+      <div class="preparation-mode">
+        {{ sp.preparation_mode or 'Não informado.' }}
+      </div>
+      {% endfor %} {% endif %} {% endfor %}
+    </div>
+    <div class="page-break"></div>
+    {% endif %} {# Seção: Fichas de Subprodutos #} {% if
+    report_data.sub_products_summary %} {{ section_cover_page( title='Fichas de
+    Subprodutos', id='sub_products_summary',
+    image_url=report_data.sub_products_summary.cover_image_url,
+    company_logo_url=company_logo_url ) }}
+    <div class="page">
+      <h2>Sumário de Fichas de Subproduto</h2>
+      <ul>
+        {% for sheet in report_data.sub_products_summary['sheets'] %}
+        <li>
+          <a href="#sub-product-sheet-{{ loop.index }}">{{ sheet.name }}</a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="page-break"></div>
+
+    {% for sheet in report_data.sub_products_summary['sheets'] %}
+    <div class="page">
+      <h3 id="sub-product-sheet-{{ loop.index }}">{{ sheet.name }}</h3>
+      {% if sheet.photo_url %}
+      <div style="text-align: center; margin-bottom: 20px">
+        <img
+          src="{{ sheet.photo_url }}"
+          alt="Foto de {{ sheet.name }}"
+          style="max-width: 80%; height: auto; border-radius: 8px"
+        />
+      </div>
+      {% endif %}
+      <p>
+        <strong>Custo Total:</strong> R$ {{
+        "%.2f"|format(sheet.total_cost|float) }} |
+        <strong>Custo por Kg:</strong> R$ {{
+        "%.2f"|format(sheet.cost_per_kg|float) }} |
+        <strong>Rendimento:</strong> {{ "%.3f"|format(sheet.yield_grams|float)
+        }} kg
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Ingrediente</th>
+            <th>Peso Bruto (kg)</th>
+            <th>Peso Líquido (kg)</th>
+            <th>Fator Correção</th>
+            <th>Custo na Receita</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for ingredient in sheet['ingredients'] %}
+          <tr>
+            <td>{{ ingredient.name }}</td>
+            <td>{{ "%.3f"|format(ingredient.gross_weight|float) }}</td>
+            <td>{{ "%.3f"|format(ingredient.net_weight|float) }}</td>
+            <td>{{ "%.2f"|format(ingredient.correction_factor|float) }}</td>
+            <td>R$ {{ "%.2f"|format(ingredient.unit_cost|float) }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="page-break"></div>
+    {% endfor %} {% endif %} {# Seção: Fichas de Produtos #} {% if
+    report_data.products_summary %} {{ section_cover_page( title='Fichas de
+    Produtos', id='products_summary',
+    image_url=report_data.products_summary.cover_image_url,
+    company_logo_url=company_logo_url ) }}
+    <div class="page">
+      <h2>Sumário de Fichas de Produto</h2>
+      <ul>
+        {% for category, items in report_data.products_summary['sheets'] |
+        groupby('category.name') %}
+        <li>
+          <a href="#category-{{ category | replace(' ', '-') }}"
+            >{{ category }}</a
+          >
+          <ul class="summary-sublist">
+            {% for sheet in items %}
+            <li>
+              <a href="#product-sheet-{{ sheet.name | replace(' ', '-') }}"
+                >{{ sheet.name }}</a
+              >
+            </li>
+            {% endfor %}
+          </ul>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="page-break"></div>
+
+    {% for category, items in report_data.products_summary['sheets'] |
+    groupby('category.name') %} {% set category_id = 'category-' + category |
+    replace(' ', '-')%} {# A capa por categoria pode reusar a imagem da seção
+    principal de produtos #} {{ section_cover_page( title=category,
+    id=category_id, image_url=report_data.products_summary.cover_image_url,
+    company_logo_url=company_logo_url ) }} {% for sheet in items %}
+    <div class="page">
+      <h3 id="product-sheet-{{ sheet.name | replace(' ', '-') }}">
+        {{ sheet.name }}
+      </h3>
+      {% if sheet.photo_url %}
+      <div style="text-align: center; margin-bottom: 20px">
+        <img
+          src="{{ sheet.photo_url }}"
+          alt="Foto de {{ sheet.name }}"
+          style="max-width: 80%; height: auto; border-radius: 8px"
+        />
+      </div>
+      {% endif %}
+      <p>
+        <strong>CMV Médio Ideal:</strong> {{
+        "%.2f"|format(sheet.average_ideal_cmv_percent|float) }}%
+      </p>
+
+      <h4>Resumo por Porção</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Porção</th>
+            <th>Custo</th>
+            <th>Preço Venda</th>
+            <th>CMV Ideal</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for portion in sheet['portion_summaries'] %}
+          <tr>
+            <td>{{ portion.portion_name }}</td>
+            <td>R$ {{ "%.2f"|format(portion.cost_price|float) }}</td>
+            <td>R$ {{ "%.2f"|format(portion.sale_price|float) }}</td>
+            <td>{{ "%.2f"|format(portion.ideal_cmv_percent|float) }}%</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <h4>Detalhamento de Ingredientes por Porção</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Ingrediente</th>
+            <th>Porção</th>
+            <th>Quantidade (kg)</th>
+            <th>Custo na Receita</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for ingredient in sheet['ingredients'] %} {% if ingredient.portions
+          %}
+          <tr>
+            <td rowspan="{{ ingredient.portions|length }}">
+              {{ ingredient.name }}
+            </td>
+            <td>{{ ingredient.portions[0].portion_name }}</td>
+            <td>{{ "%.3f"|format(ingredient.portions[0].quantity|float) }}</td>
+            <td>
+              R$ {{ "%.2f"|format(ingredient.portions[0].unit_cost|float) }}
+            </td>
+          </tr>
+          {% for portion in ingredient.portions[1:] %}
+          <tr>
+            <td>{{ portion.portion_name }}</td>
+            <td>{{ "%.3f"|format(portion.quantity|float) }}</td>
+            <td>R$ {{ "%.2f"|format(portion.unit_cost|float) }}</td>
+          </tr>
+          {% endfor %} {% endif %} {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="page-break"></div>
+    {% endfor %} {% endfor %} {% endif %}
+  </body>
+</html>
