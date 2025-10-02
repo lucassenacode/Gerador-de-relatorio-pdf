@@ -17,3 +17,5 @@ py gerar_relatorio.py products_summary
 
 
 py gerar_relatorio.py
+
+

@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Relatório de Projeto - {{ project_name }}</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* === REGRAS DE PÁGINA E NUMERAÇÃO === */
+      @page {
+        size: A4;
+        margin: 5mm;
+
+        /* Estilo padrão para o rodapé de todas as páginas */
+        @bottom-right {
+          content: counter(page);
+          font-family: "Poppins", sans-serif;
+          font-size: 9pt;
+          color: var(--greenMedium);
+        }
+      }
+
+      @page cover {
+        /* Rodapé específico para a capa: sem nada */
+        @bottom-right {
+          content: "";
+        }
+      }
+
+      @page summary {
+        /* Rodapé específico para o sumário: sem nada */
+        @bottom-right {
+          content: "";
+        }
+      }
+
+      :root {
+        --greenDark: #304f2f;
+        --greenMedium: #4d6b37;
+        --greenLight: #73a04c;
+        --brandRed: #c00318;
+        --Orange: #ff9f40;
+        --neutralBlack: #1a1a1a;
+        --neutralGrey: #666;
+        --neutralBg: #f5f7f1;
+        --neutralSurface: #e7eddc;
+        --white: #ffffff;
+        --color-border: #dee2e6;
+        --page-usable: 261mm;
+        --band-h: 35mm;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        line-height: 1.5;
+        color: var(--neutralGrey);
+        background-color: var(--white);
+        margin: 0;
+      }
+      .page {
+        background: var(--white);
+        height: 287mm;
+        box-sizing: border-box;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        padding: 15mm;
+      }
+      @media print {
+        body {
+          margin: 0;
+          background: none;
+        }
+        .page {
+          box-shadow: none;
+          margin: 0;
+          border-radius: 0;
+        }
+        .page-break {
+          page-break-after: always;
+        }
+      }
+
+      .page-break {
+        page-break-after: always;
+      }
+
+      /* === CAPA PRINCIPAL === */
+      .page.main-cover {
+        width: 100%;
+        height: 287mm;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        grid-template-rows: 240mm 47mm;
+        overflow: hidden;
+        page: cover; /* Associa esta seção à @page 'cover' */
+      }
+
+      .main-cover .hero {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            rgba(48, 79, 47, 0.65),
+            rgba(48, 79, 47, 0.65)
+          ),
+          var(--cover-image-url) center/cover no-repeat;
+      }
+
+      .main-cover .hero-title {
+        position: absolute;
+        left: 20mm;
+        bottom: 25mm;
+        max-width: 150mm;
+      }
+
+      .main-cover .hero-title h1 {
+        margin: 0;
+        color: var(--white);
+        font-weight: 800;
+        font-size: 16mm;
+        line-height: 1.05;
+        letter-spacing: 0.1mm;
+        border: none;
+      }
+
+      .main-cover .footer {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        margin-left: 40%;
+        background: #fff;
+      }
+
+      .main-cover .logo {
+        height: 28mm;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+      }
+
+      .main-cover .logo img {
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: contain;
+      }
+
+      /* === CAPAS DE SEÇÃO === */
+      .page.section-cover {
+        display: grid;
+        padding: 0;
+        grid-template-rows: 240mm 47mm;
+        background-color: var(--greenDark);
+        box-sizing: border-box;
+      }
+
+      .section-cover .hero-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .section-cover .footer {
+        background-color: var(--white);
+        display: grid;
+        grid-template-columns: 70% 30%;
+        align-items: center;
+        padding: 0 15mm;
+      }
+
+      .section-cover .title-block h1 {
+        font-size: 12mm;
+        font-weight: 800;
+        color: var(--greenDark);
+        margin: 0;
+        line-height: 1.1;
+        border: none;
+      }
+
+      .section-cover .logo-block {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+      }
+
+      .section-cover .logo-block img {
+        max-height: 28mm;
+        max-width: 100%;
+        object-fit: contain;
+      }
+
+      /* === SUMÁRIO EXECUTIVO === */
+      .summary-content h1,
+      .summary-list {
+        margin-right: 0;
+      }
+
+      .executive-summary-page {
+        padding: 0;
+        page: summary; /* Associa esta seção à @page 'summary' */
+      }
+
+      .summary-container {
+        display: grid;
+        grid-template-columns: 15mm 1fr; /* barra lateral + conteúdo */
+        width: 100%;
+        height: 100%;
+      }
+
+      .summary-sidebar {
+        width: 15mm;
+        background-color: var(--greenMedium);
+        height: 100%;
+      }
+
+      .summary-content {
+        grid-column: 2;
+        min-width: 0;
+        margin: 0;
+        padding: 20mm 15mm;
+      }
+
+      .summary-content h1 {
+        color: var(--greenDark);
+        border-bottom: none;
+        font-size: 14mm;
+        font-weight: 700;
+        margin: 0;
+        padding-bottom: 0;
+      }
+
+      .summary-list {
+        list-style: none;
+        padding: 0;
+        margin-top: 20mm;
+      }
+
+      .summary-list li {
+        margin-bottom: 10mm;
+      }
+
+      .summary-list li a {
+        display: flex;
+        align-items: baseline;
+        font-size: 6mm;
+        color: var(--neutralBlack);
+        font-weight: 500;
+        text-decoration: none;
+      }
+
+      .summary-item-title {
+        flex-grow: 1;
+        margin-right: 1em;
+      }
+
+      .summary-item-dots {
+        display: none;
+      }
+
+      .summary-item-page {
+        font-weight: 700;
+        display: inline-flex;
+        align-items: center;
+        justify-content: flex-end;
+        min-width: 12mm;
+        padding-left: 2mm;
+        margin-left: auto;
+      }
+
+      /* --- ESTILOS GERAIS DE CONTEÚDO --- */
+      h1,
+      h2,
+      h3 {
+        color: var(--greenDark);
+        border-bottom: 2px solid var(--color-border);
+        padding-bottom: 10px;
+        margin-top: 1em;
+      }
+      h1 {
+        font-size: 2.2em;
+      }
+      h2 {
+        font-size: 1.8em;
+      }
+      h3 {
+        font-size: 1.4em;
+        border-bottom-width: 1px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      th,
+      td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid var(--color-border);
+      }
+      th {
+        background-color: var(--neutralBg);
+        font-weight: 600;
+        color: var(--greenDark);
+      }
+      ul {
+        padding-left: 20px;
+        list-style-position: outside;
+      }
+      .summary-sublist {
+        padding-left: 20px;
+        list-style-type: circle;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      /* === DESIGN PARA PÁGINAS DE CONTEÚDO (TABELAS) === */
+      .content-page {
+        display: flex;
+        flex-direction: column;
+        min-height: 261mm;
+      }
+
+      .page-header {
+        margin-bottom: 0;
+      }
+
+      .top-bar {
+        display: flex;
+        justify-content: flex-end;
+        padding: 5mm 0;
+      }
+
+      .title-bar {
+        padding-top: 5mm;
+        padding-bottom: 10px;
+      }
+
+      .header-title {
+        color: var(--greenDark);
+        font-weight: 700;
+        font-size: 40px;
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+
+      .header-logo img {
+        height: 40px;
+        width: auto;
+        display: block;
+      }
+
+      .header-logo .logo-fallback {
+        color: var(--greenDark);
+        font-weight: 700;
+        font-size: 18px;
+        text-transform: uppercase;
+      }
+
+      .table-container {
+        flex-grow: 1;
+      }
+
+      .design-table {
+        width: 100%;
+        border-collapse: collapse;
+        border-spacing: 0;
+        table-layout: fixed;
+        margin-top: 10px;
+      }
+
+      .design-table colgroup col:nth-child(1) {
+        width: 60%;
+      }
+      .design-table colgroup col:nth-child(2) {
+        width: 20%;
+      }
+      .design-table colgroup col:nth-child(3) {
+        width: 20%;
+      }
+
+      .design-table thead {
+        display: table-header-group;
+      }
+
+      .design-table thead tr {
+        background-color: var(--greenLight);
+      }
+
+      .design-table thead th {
+        color: #fff;
+        font-size: 20px;
+        letter-spacing: 0.2px;
+        padding: 10px 12px;
+        white-space: normal; /* CORREÇÃO: Mudei de nowrap para normal */
+        background-color: transparent;
+        border: none;
+        border-bottom: none;
+        line-height: 1.2; /* CORREÇÃO: Adicionei line-height */
+        word-wrap: break-word; /* CORREÇÃO: Adicionei quebra de palavras */
+      }
+
+      .design-table thead th:first-child {
+        border-top-left-radius: 12px;
+        border-bottom-left-radius: 12px;
+      }
+
+      .design-table thead th:last-child {
+        border-top-right-radius: 12px;
+        border-bottom-right-radius: 12px;
+      }
+
+      .design-table tbody td {
+        padding: 10px 12px;
+        border-bottom: 1px solid var(--neutralSurface);
+        color: var(--neutralBlack);
+        font-size: 16px;
+        background: #fff;
+        vertical-align: middle;
+      }
+
+      .design-table tbody td:first-child {
+        white-space: normal;
+      }
+
+      .design-table tbody tr:last-child td {
+        border-bottom: none;
+      }
+
+      .design-table tbody tr:nth-child(even) td {
+        background: var(--neutralBg);
+      }
+
+      .design-table:not(.summary-table) tbody td:nth-child(2),
+      .design-table:not(.summary-table) tbody td:nth-child(3) {
+        border-left: 1px solid var(--greenLight);
+      }
+
+      .summary-table tbody td:not(:first-child) {
+        border-left: 1px solid var(--greenLight);
+      }
+
+      .num {
+        text-align: right;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .cmv-cell {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 12px;
+      }
+
+      .cmv-chip {
+        width: 28px;
+        height: 28px;
+        border-radius: 8px;
+        display: inline-block;
+      }
+
+      .chip-green {
+        background: var(--greenLight);
+      }
+
+      .chip-yellow {
+        background: var(--Orange);
+      }
+
+      .chip-red {
+        background: var(--brandRed);
+      }
+
+      tr {
+        break-inside: avoid;
+      }
+
+      /* === CAPA DO MENU DE PRODUTOS === */
+      .cover-container {
+        display: flex;
+        flex-direction: column;
+        min-height: 261mm;
+      }
+
+      .cover-hero {
+        position: relative;
+        height: 233mm;
+        margin: -20mm -20mm 0 -20mm;
+        overflow: hidden;
+        background: #4d6b37;
+      }
+
+      .cover-hero .photo {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-repeat: no-repeat;
+        background-position: center 45%;
+        background-size: cover;
+      }
+
+      .cover-band {
+        height: var(--band-h);
+        display: flex;
+        align-items: stretch;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 0;
+        background: #fff;
+        margin-top: 11mm;
+      }
+
+      .band-title {
+        flex-grow: 1;
+        min-width: 0;
+        color: #4d6b37;
+        font-weight: 700;
+        line-height: 1.02;
+        letter-spacing: 0.2px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .band-title .line1,
+      .band-title .line2 {
+        display: block;
+        white-space: nowrap;
+        font-size: 60px;
+      }
+
+      @media print {
+        .band-title .line1,
+        .band-title .line2 {
+          font-size: 55px;
+        }
+      }
+
+      .band-logo {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+      }
+
+      .band-logo img {
+        width: 25mm !important;
+        height: auto !important;
+        display: block;
+      }
+
+      .logo-fallback {
+        color: #304f2f;
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 14px;
+        white-space: nowrap;
+      }
+
+      /* === LARGURA DAS COLUNAS PARA A TABELA DE RESUMO === */
+      .summary-table colgroup col:nth-child(1) {
+        width: 35%;
+      } /* Insumo */
+      .summary-table colgroup col:nth-child(2) {
+        width: 15%;
+      } /* Categoria (reduzido) */
+      .summary-table colgroup col:nth-child(3) {
+        width: 15%;
+      } /* Custo */
+      .summary-table colgroup col:nth-child(4) {
+        width: 10%;
+      } /* Medida */
+      .summary-table colgroup col:nth-child(5) {
+        width: 25%;
+      } /* Fornecedor (aumentado) */
+
+      /* === CORREÇÕES ESPECÍFICAS PARA A TABELA DE RESUMO === */
+      .summary-table thead th {
+        font-size: 18px; /* CORREÇÃO: Reduzi um pouco o tamanho da fonte */
+        padding: 8px 10px; /* CORREÇÃO: Reduzi o padding */
+        text-align: center; /* CORREÇÃO: Centralizei o texto */
+      }
+
+      .summary-table thead th:nth-child(1) {
+        text-align: left; /* CORREÇÃO: Insumo alinhado à esquerda */
+      }
+
+      .summary-table thead th:nth-child(3) {
+        text-align: right; /* CORREÇÃO: Custo alinhado à direita */
+      }
+
+      /* === ESTILOS PARA ESPELHO DAS FICHAS TÉCNICAS === */
+      .technical-sheet {
+        margin-bottom: 25px;
+        page-break-inside: avoid;
+      }
+
+      .technical-sheet:last-child {
+        margin-bottom: 0;
+      }
+
+      .sheet-title {
+        color: var(--greenDark);
+        font-weight: 700;
+        font-size: 1.6em;
+        margin: 20px 0 15px 0;
+        padding-bottom: 8px;
+        border-bottom: 2px solid var(--greenLight);
+      }
+
+      .mirror-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 15px;
+      }
+
+      .mirror-table thead th {
+        background-color: var(--greenLight);
+        color: white;
+        font-weight: 600;
+        padding: 10px 12px;
+        text-align: left;
+        border: none;
+      }
+
+      .mirror-table thead th:first-child {
+        border-top-left-radius: 8px;
+        border-bottom-left-radius: 8px;
+      }
+
+      .mirror-table thead th:last-child {
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+      }
+
+      .mirror-table tbody td {
+        padding: 10px 12px;
+        border-bottom: 1px solid var(--neutralSurface);
+        background: #fff;
+      }
+
+      .mirror-table tbody tr:nth-child(even) td {
+        background: var(--neutralBg);
+      }
+
+      .mirror-table tbody tr:last-child td {
+        border-bottom: none;
+      }
+
+      .separator {
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent 0%,
+          var(--greenLight) 50%,
+          transparent 100%
+        );
+        margin: 20px 0;
+        border: none;
+      }
+    </style>
+  </head>
+  <body>
+    {# --- MACRO PARA A CAPA PRINCIPAL --- #} {% macro main_cover_page(title,
+    cover_image_url, client_logo_url, company_logo_url) %}
+    <div
+      class="page main-cover"
+      style="--cover-image-url: url('{{ cover_image_url }}')"
+    >
+      <div class="hero">
+        <div class="hero-title">
+          <h1>{{ title }}</h1>
+        </div>
+      </div>
+      <div class="footer">
+        <div class="logo logo-cliente">
+          {% if client_logo_url %}
+          <img src="{{ client_logo_url }}" alt="Logo do Cliente" />
+          {% endif %}
+        </div>
+        <div class="logo logo-nutribem">
+          {% if company_logo_url %}
+          <img src="{{ company_logo_url }}" alt="Nutribem" />
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="page-break"></div>
+    {% endmacro %} {# --- NOVA MACRO PARA CAPAS DE SEÇÃO --- #} {% macro
+    section_cover_page(title, image_url, company_logo_url, id='') %}
+    <div id="{{id}}" class="page section-cover">
+      <img
+        class="hero-image"
+        src="{{ image_url }}"
+        alt="Capa da Seção {{ title }}"
+      />
+      <div class="footer">
+        <div class="title-block">
+          <h1>{{ title }}</h1>
+        </div>
+        <div class="logo-block">
+          {% if company_logo_url %}
+          <img src="{{ company_logo_url }}" alt="Nutribem" />
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="page-break"></div>
+    {% endmacro %} {# --- LÓGICA PRINCIPAL DO TEMPLATE --- #} {# 1. Renderiza a
+    capa principal #} {{ main_cover_page( title=project_name,
+    cover_image_url=main_cover_image_url, client_logo_url=client_logo_url,
+    company_logo_url=company_logo_url ) }} {# 2. Sumário Executivo #}
+    <div class="page executive-summary-page">
+      <div class="summary-container">
+        <div class="summary-sidebar"></div>
+        <div class="summary-content">
+          <h1>Sumário Executivo</h1>
+          <ul class="summary-list">
+            {% if report_data.menu_products %}
+            <li>
+              <a href="#menu_products">
+                <span class="summary-item-title">Cardápio de Produtos</span>
+                <span class="summary-item-dots"></span>
+                <span class="summary-item-page"></span>
+              </a>
+            </li>
+            {% endif %} {% if report_data.ingredients_summary %}
+            <li>
+              <a href="#ingredients_summary">
+                <span class="summary-item-title">Resumo de Insumos</span>
+                <span class="summary-item-dots"></span>
+                <span class="summary-item-page"></span>
+              </a>
+            </li>
+            {% endif %} {% if report_data.sub_products_summary %}
+            <li>
+              <a href="#sub_products_summary">
+                <span class="summary-item-title"
+                  >Fichas Técnicas de Subprodutos</span
+                >
+                <span class="summary-item-dots"></span>
+                <span class="summary-item-page"></span>
+              </a>
+            </li>
+            {% endif %} {% if report_data.products_summary %}
+            <li>
+              <a href="#products_summary">
+                <span class="summary-item-title"
+                  >Fichas Técnicas de Produtos</span
+                >
+                <span class="summary-item-dots"></span>
+                <span class="summary-item-page"></span>
+              </a>
+            </li>
+            {% endif %} {% if report_data.technical_sheets_mirror %}
+            <li>
+              <a href="#technical_sheets_mirror">
+                <span class="summary-item-title"
+                  >Espelho das Fichas Técnicas</span
+                >
+                <span class="summary-item-dots"></span>
+                <span class="summary-item-page"></span>
+              </a>
+            </li>
+            {% endif %} {% if report_data.product_preparation_mode %}
+            <li>
+              <a href="#product_preparation_mode">
+                <span class="summary-item-title"
+                  >Modo de Preparo dos Produtos</span
+                >
+                <span class="summary-item-dots"></span>
+                <span class="summary-item-page"></span>
+              </a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="page-break"></div>
+
+    {# 3. Seções do Relatório #} {# --- SEÇÃO CARDÁPIO DE PRODUTOS --- #} {% if
+    report_data.menu_products %} {{ section_cover_page( title='Cardápio de
+    Produtos', id='menu_products',
+    image_url=report_data.menu_products.cover_image_url,
+    company_logo_url=company_logo_url )}} {# Páginas de conteúdo do cardápio #}
+    {% set menu = report_data.menu_products %} {% set items = menu['items'] if
+    menu['items'] is defined else menu %} {% set items_per_page = 20 %} {% set
+    total_pages = (items|length / items_per_page)|round(0, 'ceil')|int %} {% for
+    page_num in range(1, total_pages + 1) %} {% set start_index = (page_num - 1)
+    * items_per_page %} {% set end_index = [page_num * items_per_page,
+    items|length]|min %} {% set page_items = items[start_index:end_index] %}
+
+    <div class="page">
+      <div class="content-page">
+        <div class="page-header">
+          <div class="top-bar">
+            <div class="header-logo">
+              {% if company_logo_url %}
+              <img src="{{ company_logo_url }}" alt="Logo Nutribem" />
+              {% else %}
+              <span class="logo-fallback">NUTRIBEM</span>
+              {% endif %}
+            </div>
+          </div>
+          <div class="title-bar">
+            <div class="header-title">Cardápio</div>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table class="design-table">
+            <colgroup>
+              <col />
+              <col />
+              <col />
+            </colgroup>
+            <thead>
+              <tr>
+                <th>Produto</th>
+                <th class="num">Custo</th>
+                <th class="num">CMV Ideal</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for item in page_items %} {% set cmv = (item.ideal_cmv | float)
+              %} {% set chip = 'chip-red' %} {% if cmv <= 35 %} {% set chip =
+              'chip-green' %} {% elif cmv <= 40 %} {% set chip = 'chip-yellow'
+              %} {% endif %}
+              <tr>
+                <td>{{ item.product_name }}</td>
+                <td class="num col-cost">
+                  R$ {{ '%.2f'|format(item.cost_price)|replace('.', ',') }}
+                </td>
+                <td class="num">
+                  <div class="cmv-cell">
+                    <span>{{ '%.0f'|format(cmv) }}%</span>
+                    <span class="cmv-chip {{ chip }}"></span>
+                  </div>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    {% if not loop.last %}
+    <div class="page-break"></div>
+    {% endif %} {% endfor %}
+    <div class="page-break"></div>
+    {% endif %} {# --- SEÇÃO RESUMO DE INSUMOS --- #} {% if
+    report_data.ingredients_summary %} {{ section_cover_page( title='Resumo de
+    Insumos', id='ingredients_summary',
+    image_url=report_data.ingredients_summary.cover_image_url,
+    company_logo_url=company_logo_url )}}
+    <div class="page page-content">
+      <div class="page-header">
+        <div class="top-bar">
+          <div class="header-logo">
+            {% if company_logo_url %}
+            <img src="{{ company_logo_url }}" alt="Logo Nutribem" />
+            {% endif %}
+          </div>
+        </div>
+        <div class="title-bar">
+          <div class="header-title">Resumo</div>
+        </div>
+      </div>
+
+      <table class="design-table summary-table">
+        <colgroup>
+          <col />
+          <col />
+          <col />
+          <col />
+          <col />
+        </colgroup>
+        <thead>
+          <tr>
+            <th>Insumo</th>
+            <th>Categoria</th>
+            <th class="num">Custo</th>
+            <th>Medida</th>
+            <th>Fornecedor</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in report_data.ingredients_summary['items'] %}
+          <tr>
+            <td>{{ item.name }}</td>
+            <td>{{ item.category }}</td>
+            <td class="num">
+              R$ {{ "%.2f"|format(item.gross_price|float)|replace('.', ',') }}
+            </td>
+            <td>{{ item.measure or 'N/A' }}</td>
+            <td>{{ item.supplier or '---' }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="page-break"></div>
+    {% endif %} {# --- SEÇÃO ESPELHO DAS FICHAS TÉCNICAS --- #} {% if
+    report_data.technical_sheets_mirror %} {{ section_cover_page( title='Espelho
+    das Fichas Técnicas', id='technical_sheets_mirror',
+    image_url=report_data.technical_sheets_mirror.cover_image_url,
+    company_logo_url=company_logo_url )}}
+
+    <div class="page page-content">
+      <div class="page-header">
+        <div class="top-bar">
+          <div class="header-logo">
+            {% if company_logo_url %}
+            <img src="{{ company_logo_url }}" alt="Logo Nutribem" />
+            {% endif %}
+          </div>
+        </div>
+        <div class="title-bar">
+          <div class="header-title">Espelho das Fichas Técnicas</div>
+        </div>
+      </div>
+
+      <div class="table-container">
+        {% for sheet in report_data.technical_sheets_mirror.sheets %}
+        <div class="technical-sheet">
+          <h2 class="sheet-title">{{ sheet.sheet_name }}</h2>
+
+          <table class="mirror-table">
+            <thead>
+              <tr>
+                <th>Ingredientes</th>
+                <th>Quantidade</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for ingredient in sheet.ingredients %}
+              <tr>
+                <td>{{ ingredient.name }}</td>
+                <td>
+                  {% if ingredient.quantity is number %} {{
+                  "%.3f"|format(ingredient.quantity) }} {% if
+                  ingredient.quantity >= 1 %} {% if ingredient.name == 'Mireprix
+                  Base' %}ml{% else %}g{% endif %} {% else %} {% if
+                  ingredient.name == 'Mireprix Base' %}ml{% else %}g{% endif %}
+                  {% endif %} {% else %} {{ ingredient.quantity }} {% endif %}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+          {% if not loop.last %}
+          <hr class="separator" />
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="page-break"></div>
+    {% endif %}
+  </body>
+</html>

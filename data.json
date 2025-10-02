@@ -9,11 +9,15 @@
       "items": [
         {
           "product_name": "Bolo de Cenoura com Cobertura de Chocolate – Individual",
-          "sale_price": 15.0
+          "sale_price": 15.0,
+          "cost_price": 2.0,
+          "ideal_cmv": 13.33
         },
         {
           "product_name": "Bolo de Cenoura com Cobertura de Chocolate – Duplo",
-          "sale_price": 28.0
+          "sale_price": 28.0,
+          "cost_price": 4.0,
+          "ideal_cmv": 14.29
         }
       ]
     },
@@ -24,79 +28,92 @@
           "name": "Farinha de Trigo Tipo 1",
           "category": "In natura",
           "gross_price": 5.5,
-          "supplier": "Moagem Central Distribuidora"
+          "supplier": "Moagem Central Distribuidora",
+          "measure": "kg"
         },
         {
           "name": "Açúcar Refinado",
           "category": "In natura",
           "gross_price": 6.0,
-          "supplier": "Doce Cana Atacado"
+          "supplier": "Doce Cana Atacado",
+          "measure": "kg"
         },
         {
           "name": "Ovo de Galinha (Tipo Grande)",
           "category": "In natura",
           "gross_price": 14.0,
-          "supplier": "---"
+          "supplier": "---",
+          "measure": "dúzia"
         },
         {
           "name": "Óleo de Soja",
           "category": "In natura",
           "gross_price": 8.5,
-          "supplier": "Cereais & Cia"
+          "supplier": "Cereais & Cia",
+          "measure": "litro"
         },
         {
           "name": "Cenoura",
           "category": "In natura",
           "gross_price": 4.5,
-          "supplier": "Hortifruti Raízes da Terra"
+          "supplier": "Hortifruti Raízes da Terra",
+          "measure": "kg"
         },
         {
           "name": "Fermento em Pó Químico",
           "category": "In natura",
           "gross_price": 25.0,
-          "supplier": "Ingredientes Mágicos Ltda"
+          "supplier": "Ingredientes Mágicos Ltda",
+          "measure": "kg"
         },
         {
           "name": "Sal Refinado",
           "category": "In natura",
           "gross_price": 2.5,
-          "supplier": "Salinas do Nordeste"
+          "supplier": "Salinas do Nordeste",
+          "measure": "kg"
         },
         {
           "name": "Manteiga Sem Sal (Tablete)",
           "category": "In natura",
           "gross_price": 130.0,
-          "supplier": "Laticínios Vaca Feliz"
+          "supplier": "Laticínios Vaca Feliz",
+          "measure": "kg"
         },
         {
           "name": "Leite Condensado (Lata)",
           "category": "In natura",
           "gross_price": 8.0,
-          "supplier": "Laticínios Vaca Feliz"
+          "supplier": "Laticínios Vaca Feliz",
+          "measure": "lata"
         },
         {
           "name": "Chocolate em Pó 50%",
           "category": "In natura",
           "gross_price": 35.0,
-          "supplier": "Cacau & Cia"
+          "supplier": "Cacau & Cia",
+          "measure": "kg"
         },
         {
           "name": "Creme de Leite UHT (Caixa)",
           "category": "In natura",
           "gross_price": 7.5,
-          "supplier": "Laticínios Vaca Feliz"
+          "supplier": "Laticínios Vaca Feliz",
+          "measure": "caixa"
         },
         {
           "name": "Granulado de Chocolate Meio Amargo",
           "category": "In natura",
           "gross_price": 22.0,
-          "supplier": "Cacau & Cia"
+          "supplier": "Cacau & Cia",
+          "measure": "kg"
         },
         {
           "name": "Cobertura de Chocolate Cremosa",
           "category": "Processado",
           "gross_price": 22.0,
-          "supplier": "---"
+          "supplier": "---",
+          "measure": "kg"
         }
       ]
     },
