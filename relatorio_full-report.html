@@ -8,34 +8,7 @@
       rel="stylesheet"
     />
     <style>
-      /* === REGRAS DE PÁGINA E NUMERAÇÃO === */
-      @page {
-        size: A4;
-        margin: 5mm;
-
-        /* Estilo padrão para o rodapé de todas as páginas */
-        @bottom-right {
-          content: counter(page);
-          font-family: "Poppins", sans-serif;
-          font-size: 9pt;
-          color: var(--greenMedium);
-        }
-      }
-
-      @page cover {
-        /* Rodapé específico para a capa: sem nada */
-        @bottom-right {
-          content: "";
-        }
-      }
-
-      @page summary {
-        /* Rodapé específico para o sumário: sem nada */
-        @bottom-right {
-          content: "";
-        }
-      }
-
+      /* === VARIÁVEIS E RESET === */
       :root {
         --greenDark: #304f2f;
         --greenMedium: #4d6b37;
@@ -63,6 +36,31 @@
         background-color: var(--white);
         margin: 0;
       }
+
+      /* === CONFIGURAÇÕES DE PÁGINA E IMPRESSÃO === */
+      @page {
+        size: A4;
+        margin: 5mm;
+        @bottom-right {
+          content: counter(page);
+          font-family: "Poppins", sans-serif;
+          font-size: 9pt;
+          color: var(--greenMedium);
+        }
+      }
+
+      @page cover {
+        @bottom-right {
+          content: "";
+        }
+      }
+
+      @page summary {
+        @bottom-right {
+          content: "";
+        }
+      }
+
       .page {
         background: var(--white);
         height: 287mm;
@@ -70,8 +68,8 @@
         position: relative;
         display: flex;
         flex-direction: column;
-        padding: 15mm;
       }
+
       @media print {
         body {
           margin: 0;
@@ -91,7 +89,7 @@
         page-break-after: always;
       }
 
-      /* === CAPA PRINCIPAL === */
+      /* === CAPAS === */
       .page.main-cover {
         width: 100%;
         height: 287mm;
@@ -100,7 +98,7 @@
         display: grid;
         grid-template-rows: 240mm 47mm;
         overflow: hidden;
-        page: cover; /* Associa esta seção à @page 'cover' */
+        page: cover;
       }
 
       .main-cover .hero {
@@ -170,9 +168,13 @@
       .section-cover .footer {
         background-color: var(--white);
         display: grid;
-        grid-template-columns: 70% 30%;
+        grid-template-columns: 1fr auto;
         align-items: center;
-        padding: 0 15mm;
+      }
+
+      .section-cover .title-block {
+        justify-self: start;
+        padding-left: 15mm; /* ← CORREÇÃO ADICIONADA */
       }
 
       .section-cover .title-block h1 {
@@ -189,28 +191,24 @@
         justify-content: center;
         align-items: center;
         height: 100%;
+        margin: 13.5mm 0;
       }
 
       .section-cover .logo-block img {
-        max-height: 28mm;
+        max-height: 20mm;
         max-width: 100%;
         object-fit: contain;
       }
 
       /* === SUMÁRIO EXECUTIVO === */
-      .summary-content h1,
-      .summary-list {
-        margin-right: 0;
-      }
-
       .executive-summary-page {
         padding: 0;
-        page: summary; /* Associa esta seção à @page 'summary' */
+        page: summary;
       }
 
       .summary-container {
         display: grid;
-        grid-template-columns: 15mm 1fr; /* barra lateral + conteúdo */
+        grid-template-columns: 15mm 1fr;
         width: 100%;
         height: 100%;
       }
@@ -261,10 +259,6 @@
         margin-right: 1em;
       }
 
-      .summary-item-dots {
-        display: none;
-      }
-
       .summary-item-page {
         font-weight: 700;
         display: inline-flex;
@@ -275,64 +269,11 @@
         margin-left: auto;
       }
 
-      /* --- ESTILOS GERAIS DE CONTEÚDO --- */
-      h1,
-      h2,
-      h3 {
-        color: var(--greenDark);
-        border-bottom: 2px solid var(--color-border);
-        padding-bottom: 10px;
-        margin-top: 1em;
-      }
-      h1 {
-        font-size: 2.2em;
-      }
-      h2 {
-        font-size: 1.8em;
-      }
-      h3 {
-        font-size: 1.4em;
-        border-bottom-width: 1px;
-      }
-
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-      }
-      th,
-      td {
-        padding: 12px;
-        text-align: left;
-        border-bottom: 1px solid var(--color-border);
-      }
-      th {
-        background-color: var(--neutralBg);
-        font-weight: 600;
-        color: var(--greenDark);
-      }
-      ul {
-        padding-left: 20px;
-        list-style-position: outside;
-      }
-      .summary-sublist {
-        padding-left: 20px;
-        list-style-type: circle;
-      }
-      a {
-        text-decoration: none;
-        color: inherit;
-      }
-
-      /* === DESIGN PARA PÁGINAS DE CONTEÚDO (TABELAS) === */
+      /* === CABEÇALHO DE PÁGINAS DE CONTEÚDO === */
       .content-page {
         display: flex;
         flex-direction: column;
         min-height: 261mm;
-      }
-
-      .page-header {
-        margin-bottom: 0;
       }
 
       .top-bar {
@@ -349,9 +290,10 @@
       .header-title {
         color: var(--greenDark);
         font-weight: 700;
-        font-size: 40px;
+        font-size: 32px;
         border-bottom: none;
         padding-bottom: 0;
+        margin: 0;
       }
 
       .header-logo img {
@@ -371,6 +313,7 @@
         flex-grow: 1;
       }
 
+      /* === TABELAS PRINCIPAIS === */
       .design-table {
         width: 100%;
         border-collapse: collapse;
@@ -389,10 +332,6 @@
         width: 20%;
       }
 
-      .design-table thead {
-        display: table-header-group;
-      }
-
       .design-table thead tr {
         background-color: var(--greenLight);
       }
@@ -402,17 +341,20 @@
         font-size: 20px;
         letter-spacing: 0.2px;
         padding: 10px 12px;
-        white-space: normal; /* CORREÇÃO: Mudei de nowrap para normal */
+        white-space: nowrap; /* ← CORREÇÃO: Mudado de 'normal' para 'nowrap' */
         background-color: transparent;
         border: none;
         border-bottom: none;
-        line-height: 1.2; /* CORREÇÃO: Adicionei line-height */
-        word-wrap: break-word; /* CORREÇÃO: Adicionei quebra de palavras */
+        line-height: 1.2;
+        word-wrap: break-word;
+        text-align: center; /* ← CORREÇÃO ADICIONADA */
       }
 
       .design-table thead th:first-child {
         border-top-left-radius: 12px;
         border-bottom-left-radius: 12px;
+        text-align: left; /* ← CORREÇÃO ADICIONADA */
+        white-space: normal; /* ← CORREÇÃO ADICIONADA */
       }
 
       .design-table thead th:last-child {
@@ -421,7 +363,7 @@
       }
 
       .design-table tbody td {
-        padding: 10px 12px;
+        padding: 12px 15px; /* ← CORREÇÃO: Aumentado de 10px 12px */
         border-bottom: 1px solid var(--neutralSurface);
         color: var(--neutralBlack);
         font-size: 16px;
@@ -446,15 +388,34 @@
         border-left: 1px solid var(--greenLight);
       }
 
-      .summary-table tbody td:not(:first-child) {
-        border-left: 1px solid var(--greenLight);
+      /* === ESTILOS DE TEXTO E NUMERAÇÃO === */
+      h1,
+      h2,
+      h3 {
+        color: var(--greenDark);
+        border-bottom: 2px solid var(--color-border);
+        padding-bottom: 10px;
+        margin-top: 1em;
+      }
+
+      h1 {
+        font-size: 2.2em;
+      }
+      h2 {
+        font-size: 1.8em;
+      }
+      h3 {
+        font-size: 1.4em;
+        border-bottom-width: 1px;
       }
 
       .num {
         text-align: right;
         font-variant-numeric: tabular-nums;
+        padding-right: 20px; /* ← CORREÇÃO ADICIONADA */
       }
 
+      /* === COMPONENTES DE INTERFACE === */
       .cmv-cell {
         display: flex;
         align-items: center;
@@ -472,135 +433,48 @@
       .chip-green {
         background: var(--greenLight);
       }
-
       .chip-yellow {
         background: var(--Orange);
       }
-
       .chip-red {
         background: var(--brandRed);
       }
 
-      tr {
-        break-inside: avoid;
-      }
-
-      /* === CAPA DO MENU DE PRODUTOS === */
-      .cover-container {
-        display: flex;
-        flex-direction: column;
-        min-height: 261mm;
-      }
-
-      .cover-hero {
-        position: relative;
-        height: 233mm;
-        margin: -20mm -20mm 0 -20mm;
-        overflow: hidden;
-        background: #4d6b37;
-      }
-
-      .cover-hero .photo {
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        background-repeat: no-repeat;
-        background-position: center 45%;
-        background-size: cover;
-      }
-
-      .cover-band {
-        height: var(--band-h);
-        display: flex;
-        align-items: stretch;
-        justify-content: space-between;
-        gap: 20px;
-        padding: 0;
-        background: #fff;
-        margin-top: 11mm;
-      }
-
-      .band-title {
-        flex-grow: 1;
-        min-width: 0;
-        color: #4d6b37;
-        font-weight: 700;
-        line-height: 1.02;
-        letter-spacing: 0.2px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-      }
-
-      .band-title .line1,
-      .band-title .line2 {
-        display: block;
-        white-space: nowrap;
-        font-size: 60px;
-      }
-
-      @media print {
-        .band-title .line1,
-        .band-title .line2 {
-          font-size: 55px;
-        }
-      }
-
-      .band-logo {
-        flex-shrink: 0;
-        display: flex;
-        align-items: center;
-      }
-
-      .band-logo img {
-        width: 25mm !important;
-        height: auto !important;
-        display: block;
-      }
-
-      .logo-fallback {
-        color: #304f2f;
-        font-weight: 700;
-        text-transform: uppercase;
-        font-size: 14px;
-        white-space: nowrap;
-      }
-
-      /* === LARGURA DAS COLUNAS PARA A TABELA DE RESUMO === */
+      /* === TABELA DE RESUMO ESPECÍFICA === */
       .summary-table colgroup col:nth-child(1) {
         width: 35%;
-      } /* Insumo */
+      }
       .summary-table colgroup col:nth-child(2) {
         width: 15%;
-      } /* Categoria (reduzido) */
+      }
       .summary-table colgroup col:nth-child(3) {
         width: 15%;
-      } /* Custo */
+      }
       .summary-table colgroup col:nth-child(4) {
         width: 10%;
-      } /* Medida */
+      }
       .summary-table colgroup col:nth-child(5) {
         width: 25%;
-      } /* Fornecedor (aumentado) */
+      }
 
-      /* === CORREÇÕES ESPECÍFICAS PARA A TABELA DE RESUMO === */
       .summary-table thead th {
-        font-size: 18px; /* CORREÇÃO: Reduzi um pouco o tamanho da fonte */
-        padding: 8px 10px; /* CORREÇÃO: Reduzi o padding */
-        text-align: center; /* CORREÇÃO: Centralizei o texto */
+        font-size: 18px;
+        padding: 8px 10px;
+        text-align: center;
       }
 
       .summary-table thead th:nth-child(1) {
-        text-align: left; /* CORREÇÃO: Insumo alinhado à esquerda */
+        text-align: left;
       }
-
       .summary-table thead th:nth-child(3) {
-        text-align: right; /* CORREÇÃO: Custo alinhado à direita */
+        text-align: right;
       }
 
-      /* === ESTILOS PARA ESPELHO DAS FICHAS TÉCNICAS === */
+      .summary-table tbody td:not(:first-child) {
+        border-left: 1px solid var(--greenLight);
+      }
+
+      /* === FICHAS TÉCNICAS - ESPELHO === */
       .technical-sheet {
         margin-bottom: 25px;
         page-break-inside: avoid;
@@ -670,7 +544,7 @@
         border: none;
       }
 
-      /* === ESTILOS PARA MODO DE PREPARO === */
+      /* === MODO DE PREPARO === */
       .preparation-section {
         margin-bottom: 30px;
         page-break-inside: avoid;
@@ -742,6 +616,11 @@
         content: "▸";
         margin-right: 8px;
         color: var(--greenLight);
+      }
+
+      /* === QUEBRAS DE PÁGINA === */
+      tr {
+        break-inside: avoid;
       }
     </style>
   </head>
@@ -864,68 +743,67 @@
      
            
 
-    <div class="page">
-      <div class="content-page">
-        <div class="page-header">
-          <div class="top-bar">
-            <div class="header-logo">
-              
-              <img src="http://56.125.10.67/public/general/logo-nutribem.png" alt="Logo Nutribem" />
-              
-            </div>
-          </div>
-          <div class="title-bar">
-            <div class="header-title">Cardápio</div>
+    <div class="page content-page">
+      <div class="page-header">
+        <div class="top-bar">
+          <div class="header-logo">
+            
+            <img src="http://56.125.10.67/public/general/logo-nutribem.png" alt="Logo Nutribem" />
+            
           </div>
         </div>
-
-        <div class="table-container">
-          <table class="design-table">
-            <colgroup>
-              <col />
-              <col />
-              <col />
-            </colgroup>
-            <thead>
-              <tr>
-                <th>Produto</th>
-                <th class="num">Custo</th>
-                <th class="num">CMV Ideal</th>
-              </tr>
-            </thead>
-            <tbody>
-                   
-              <tr>
-                <td>Bolo de Cenoura com Cobertura de Chocolate – Individual</td>
-                <td class="num col-cost">
-                  R$ 2,00
-                </td>
-                <td class="num">
-                  <div class="cmv-cell">
-                    <span>13%</span>
-                    <span class="cmv-chip chip-green"></span>
-                  </div>
-                </td>
-              </tr>
-                   
-              <tr>
-                <td>Bolo de Cenoura com Cobertura de Chocolate – Duplo</td>
-                <td class="num col-cost">
-                  R$ 4,00
-                </td>
-                <td class="num">
-                  <div class="cmv-cell">
-                    <span>14%</span>
-                    <span class="cmv-chip chip-green"></span>
-                  </div>
-                </td>
-              </tr>
-              
-            </tbody>
-          </table>
+        <div class="title-bar">
+          <div class="header-title">Cardápio</div>
         </div>
       </div>
+
+      <div class="table-container">
+        <table class="design-table">
+          <colgroup>
+            <col />
+            <col />
+            <col />
+          </colgroup>
+          <thead>
+            <tr>
+              <th>Produto</th>
+              <th class="num">Custo</th>
+              <th class="num">CMV Ideal</th>
+            </tr>
+          </thead>
+          <tbody>
+                 
+            <tr>
+              <td>Bolo de Cenoura com Cobertura de Chocolate – Individual</td>
+              <td class="num col-cost">
+                R$ 2,00
+              </td>
+              <td class="num">
+                <div class="cmv-cell">
+                  <span>13%</span>
+                  <span class="cmv-chip chip-green"></span>
+                </div>
+              </td>
+            </tr>
+                 
+            <tr>
+              <td>Bolo de Cenoura com Cobertura de Chocolate – Duplo</td>
+              <td class="num col-cost">
+                R$ 4,00
+              </td>
+              <td class="num">
+                <div class="cmv-cell">
+                  <span>14%</span>
+                  <span class="cmv-chip chip-green"></span>
+                </div>
+              </td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </div>
     </div>
+
      
     <div class="page-break"></div>
        
